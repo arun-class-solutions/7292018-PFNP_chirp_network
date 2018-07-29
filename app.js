@@ -81,5 +81,19 @@ app.put("/chirps/:id", (req, res) => {
 });
 
 //Delete a chirp
+// Hint: Method you need to remove a chirp is called .destroy() NOTHING WITHIN THE PARENTHESES
+app.delete("/chirps/:id", (req, res) => {
+  // Step 1: Locate chirp in DB via its ID
+  // Step 2: Delete specific chirp from DB
+  // Step 3: Redirect back to /chirps
+
+  var chirpId = req.params.id;
+
+  models.Chirp.findById(chirpId).then((chirp) => {
+    chirp.destroy().then(() => {
+      res.redirect("/chirps");
+    });
+  });
+});
 
 app.listen(process.env.PORT || 3000);
